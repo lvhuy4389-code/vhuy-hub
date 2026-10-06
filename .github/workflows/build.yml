@@ -1,0 +1,29 @@
+name: Build Dylib
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: macos-13
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Theos & iOS SDK
+        run: |
+          git clone --recursive https://github.com/theos/theos.git $HOME/theos
+          echo "THEOS=$HOME/theos" >> $GITHUB_ENV
+          curl -LO https://github.com/theos/sdks/archive/master.zip
+          unzip -q master.zip
+          mv sdks-master/* $HOME/theos/sdks/
+          rm -rf master.zip sdks-master
+
+      - name: Build Tweak
+        run: |
+          export THEOS=$HOME/theos
+          $THEOS/bin/make package FINALPACKAGE=1
+
+      - name: Upload Dylib
+        uses: actions/upload-artifact@v4
+        with:
+          name: VanHuy.dylib
+          path: .theos/obj/
