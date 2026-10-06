@@ -1,2 +1,0 @@
-# vhuy-hub
-huy cute
