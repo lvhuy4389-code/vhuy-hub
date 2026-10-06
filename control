@@ -1,0 +1,9 @@
+Package: com.vanhuy.skymod
+Name: VanHuy Sky Mod
+Depends: mobilesubstrate
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: Mod Sky Bầu Trời Tím Van Huy
+Maintainer: Van Huy
+Author: Van Huy
+Section: Tweaks
